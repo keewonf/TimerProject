@@ -8,18 +8,18 @@ export default function Timer({
 
   let timerTimeOut
   let minutes = Number(minutesDisplay.textContent) 
-
-  function updateDisplay(newMinutes, seconds){
+  let seconds = Number(secondsDisplay.textContent)
+  
+  function updateDisplay(newMinutes, newSeconds){
     newMinutes = newMinutes === undefined ? minutes : newMinutes
-    seconds = seconds === undefined ? 0 : seconds
+    newSeconds = newSeconds === undefined ? seconds : newSeconds
     minutesDisplay.textContent = String(newMinutes).padStart(2,"0")
-    secondsDisplay.textContent = String(seconds).padStart(2, "0")
+    secondsDisplay.textContent = String(newSeconds).padStart(2, "0")
   }
 
   function reset() {
-  updateDisplay(minutes, 0)
+  updateDisplay(minutes, seconds)
   clearTimeout(timerTimeOut)
-  console.log(minutes)
   }
 
   function countdown () {
@@ -50,7 +50,7 @@ export default function Timer({
     }
 
     if (seconds <= 0) {
-      seconds = 2
+      seconds = 60
       --minutes
     }
 
@@ -65,6 +65,10 @@ export default function Timer({
     minutes = newMinutes
   }
 
+  function updateSeconds(newSeconds) {
+    seconds = newSeconds
+  }
+
   function hold() {
     clearTimeout(timerTimeOut)
   }
@@ -74,6 +78,7 @@ export default function Timer({
     reset,
     updateDisplay,
     updateMinutes,
+    updateSeconds,
     hold
   }
 }

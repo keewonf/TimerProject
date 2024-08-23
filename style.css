@@ -13,6 +13,9 @@
   --bg-primary-light: hsla(var(--base-color), 100%, 63%, 0.13);
   --primary-color: hsl(var(--base-color), 100%, 63%);
   --text-color: #FFFFFF;
+
+  --bg-error: #F03E3E;
+  --tt-error: white;
 }
 
 body {
@@ -75,4 +78,28 @@ footer {
   justify-self: end;
 
   padding: 0 4rem 3.2rem 0;
+}
+
+.alert-error.open {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.alert-error {
+  background-color: var(--bg-error);
+  color: var(--tt-error);
+  
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  padding: .8rem 0;
+  text-align: center;
+  
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  font-size: 1.5rem;
+
+  transform: translateY(-40px);
+  transition: transform .5s;
 }

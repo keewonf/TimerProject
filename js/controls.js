@@ -1,3 +1,5 @@
+import { AlertError } from "./alert-error.js"
+
 export default function Controls({
   buttonPlay,
   buttonPause,
@@ -30,9 +32,18 @@ export default function Controls({
 
   function getMinutes() {
     let newMinutes = prompt('Quantos minutos?')
+    newMinutes = newMinutes.replace(':','.').replace(',','.')
+    const newMinutesIsNotANumber = isNaN(newMinutes)
+    
+    if(newMinutesIsNotANumber) {
+      AlertError.open()
+      return
+    }
+
     if (!newMinutes) {
       return false
     }
+
     return newMinutes
     }
   
