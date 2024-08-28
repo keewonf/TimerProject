@@ -30,28 +30,48 @@ export default function Controls({
     buttonStop.classList.add('hide')
   }
 
-  function getMinutes() {
-    let newMinutes = prompt('Quantos minutos?')
-    newMinutes = newMinutes.replace(':','.').replace(',','.')
-    const newMinutesIsNotANumber = isNaN(newMinutes)
+  function getTimer() {
+    let newTimer = prompt('Quanto tempo?')
+    let Cutted = []
+    if (newTimer) {
+    newTimer = newTimer.replace(':','.').replace(',','.')
+    }
+
+    const newTimerIsNotANumber = isNaN(newTimer)
     
-    if(newMinutesIsNotANumber) {
+    if(newTimerIsNotANumber) {
       AlertError.open()
       return
     }
 
-    if (!newMinutes) {
+    if (!newTimer) {
       return false
     }
 
-    return newMinutes
+    function cutTimer(Timer) {
+      let cutNumber = Timer.toString().split('.')
+      
+
+      if (!cutNumber[1] || cutNumber[1].length>2 || Number(cutNumber[1] > 60 || cutNumber[1] * 10 > 60)) {
+        cutNumber[1] = '0'
+      }
+
+      let cutMinutes = cutNumber[0]
+      let cutSeconds = cutNumber[1]
+      Cutted = [ cutMinutes, cutSeconds]
+      
+      return Cutted
     }
+    cutTimer(newTimer)
+    newTimer = Cutted
+    return newTimer
+  }
   
   
   return {
     reset,
     play,
     pause,
-    getMinutes
+    getTimer
   }
 }
